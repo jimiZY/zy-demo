@@ -1,0 +1,34 @@
+server:
+  port: 4396
+spring:
+  application:
+    name: producer-demo
+  cloud:
+    stream:
+      rocketmq:
+        binder:
+          name-server: 192.168.199.191:9876
+        #bindings:
+          #jimi-fail-output:
+            #producer:
+              #group: zy-producer-demo-group
+              #sync: true
+      bindings:
+        jimi-fail-output:
+          destination: jimi-test-topic
+          context-type: application/json
+
+  datasource:
+    url: jdbc:mysql://192.168.199.185:3306/zy_case?useUnicode=true&characterEncoding=UTF8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: Cnns123!@#
+
+
+
+
+mybatis-plus:
+  configuration:
+    #日志输出
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+  mapper-locations: classpath*:/mapper/**/*Mapper.xml

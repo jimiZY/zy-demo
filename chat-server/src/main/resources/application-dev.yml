@@ -1,0 +1,46 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/zy_case?useUnicode=true&characterEncoding=UTF8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: 123456
+    #使用druid数据源
+    druid:
+      maxActive: 20
+      initialSize: 1
+      maxWait: 60000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+
+      filter:
+        stat:
+          enabled: true
+          db-type: mysql
+          log-slow-sql: true
+          slow-sql-millis: 1000
+      web-stat-filter:
+        enabled: true
+      stat-view-servlet:
+        enabled: true
+        reset-enable: false
+        login-username: druid
+        login-password: druid
+        #allow:
+        #deny:
+
+  #阿里服务发现,配置中心,链路跟踪服务配置
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+redis:
+  ip: 192.168.199.190
+  port: 6379
+ # pwd:

@@ -1,0 +1,8 @@
+server:
+  port: 9147
+
+cm:
+  #address: ws://192.168.99.238/ws
+  address: ws://192.168.199.230/ws
+  ak: 0o4JU8Emx8IIApJ0
+  sk: jShHS5sSH6OkWGXV

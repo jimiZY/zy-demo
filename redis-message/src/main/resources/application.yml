@@ -1,0 +1,22 @@
+server:
+  port: 5744
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 200        #最大并发数
+    max-connections: 1000   #接受和处理最大连接数
+    min-SpareThreads: 20    #初始化创建的线程数
+    acceptCount: 1000        #可以放到处理队列中的请求数
+  connection-timeout: 20s
+  max-http-header-size: 1MB
+
+spring:
+  redis:
+    host: localhost
+    password: redis-pwd
+    port: 6379
+    timeout: 2000
+    database: 10
+    pool:
+    maxActive: 300
+    maxIdle: 100
+    maxWait: 1000

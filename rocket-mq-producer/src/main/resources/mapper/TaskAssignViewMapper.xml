@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cocopup.zy.rocket.mapper.TaskAssignViewMapper">
+
+    <!-- 统计技术端柱状图数据  -->
+    <select id="getTecAssHistogram" resultType="cn.cocopup.zy.rocket.dto.AssHistogramDto">
+        SELECT create_time yearMonth,count(1) count
+        FROM `task_assign_view`
+        <where>
+            <if test="tecDto.relateIds != null">
+                relate_id in
+                <foreach collection="tecDto.relateIds" item="relateId" separator="," open="(" close=")">
+                    #{relateId}
+                </foreach>
+            </if>
+            <if test="tecDto.assignType != null">
+                and assign_type = #{tecDto.assignType}
+            </if>
+            <if test="tecDto.taskState != null">
+                and task_state &gt;= #{taskState}
+            </if>
+            <if test="tecDto.otherTaskState != null">
+                and task_state &gt; 100 and task_state &lt; 170
+            </if>
+            <if test="tecDto.taskResultState != null">
+                and result_state = #{tecDto.taskResultState}
+            </if>
+        </where>
+        GROUP BY DATE_FORMAT(create_time,'%Y-%m')
+        ORDER BY DATE_FORMAT(create_time,'%Y-%m') desc
+    </select>
+</mapper>

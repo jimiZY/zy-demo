@@ -1,0 +1,21 @@
+server:
+  port: 4397
+spring:
+  cloud:
+    stream:
+      rocketmq:
+        binder:
+          name-server: 192.168.199.191:9876
+        bindings:
+          jimi-fail-input:
+            consumer:
+              tags: personObj
+      bindings:
+        jimi-fail-input:
+          destination: jimi-test-topic
+          context-type: application/json
+          group: jimi-test-topic-consumer-group
+          comsumer:
+            concurrency: 5
+            #max-attempts: 5
+

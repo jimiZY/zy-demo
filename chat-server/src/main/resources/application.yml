@@ -1,0 +1,104 @@
+
+
+
+server:
+  port: 5744
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 200        #最大并发数
+    max-connections: 1000   #接受和处理最大连接数
+    min-SpareThreads: 20    #初始化创建的线程数
+    acceptCount: 1000        #可以放到处理队列中的请求数
+    connection-timeout: 20s
+
+websocket:
+  port: 7200
+
+niosocket:
+  port: 7101
+
+history:
+  state: true
+
+
+spring:
+  mvc:
+    async:
+      request-timeout: 20s
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+  application:
+    name: chat-server
+  profiles:
+    active: dev
+
+
+
+mybatis-plus:
+  configuration:
+    #日志输出
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+  mapper-locations: classpath*:/mapper/**/*Mapper.xml
+  #type-aliases-package: net.cnns.zy.microservice.dto
+  type-enums-package: net.cnns.zy.config.enums
+
+
+
+
+#http客户端配置.请求和响应GZIP压缩支持
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+  hystrix:
+    enabled: true
+  sentinel:
+    enabled: false
+
+#负载均衡配置
+ribbon:
+  eureka:
+    enabled: true
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  OkToRetryOnAllOperations: false
+
+
+#熔断器配置
+hystrix:
+  threadpool:
+    default:
+      coreSize: 10                      #并发执行的最大线程数，默认10
+      maxQueueSize: 1000                  #BlockingQueue的最大队列数
+      queueSizeRejectionThreshold: 500    #即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+  command:
+    default:
+      execution:
+        isolation:
+          #strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 15000
+
+
+#监控系统监控状况
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
