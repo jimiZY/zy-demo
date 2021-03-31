@@ -29,7 +29,7 @@
         <lombok.version>1.18.4</lombok.version>
         <swagger-annotations.version>1.5.21</swagger-annotations.version>
         <spring-cloud-connectors.version>2.1.0.RELEASE</spring-cloud-connectors.version>
-        <guava.version>27.0.1-jre</guava.version>
+        <guava.version>29.0-jre</guava.version>
 
     </properties>
 
